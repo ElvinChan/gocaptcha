@@ -19,6 +19,7 @@ const (
 	DEFAULT_HEIGHT         = 40
 	DEFAULT_GC_PROBABILITY = 1
 	DEFAULT_GC_DIVISOR     = 100
+	DEFAULT_OFFSET         = 10
 )
 
 func loadConfigFromFile(configFile string) (error, string, *CaptchaConfig, *ImageConfig, *FilterConfig, *StoreConfig) {
@@ -94,6 +95,15 @@ func loadConfigFromFile(configFile string) (error, string, *CaptchaConfig, *Imag
 		height = int(cfgHeight)
 	}
 	imageConfig.Height = height
+
+	var offset int
+	cfgOffset, err := c.Int("image", "offset")
+	if nil != err {
+		offset = DEFAULT_OFFSET
+	} else {
+		offset = int(cfgOffset)
+	}
+	imageConfig.Offset = offset
 
 	//filterConfig
 	filterConfig := new(FilterConfig)

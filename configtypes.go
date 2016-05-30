@@ -59,6 +59,7 @@ type ImageConfig struct {
 	FontSize    float64
 	FontFiles   []string
 	fontManager *FontManager
+	Offset      int
 }
 
 const STORE_ENGINE_BUILDIN = "buildin"

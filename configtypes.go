@@ -60,6 +60,7 @@ type ImageConfig struct {
 	FontFiles   []string
 	fontManager *FontManager
 	Offset      int
+	ReOffset    int
 }
 
 const STORE_ENGINE_BUILDIN = "buildin"

@@ -167,7 +167,7 @@ func createStore(config *StoreConfig) (StoreInterface, error) {
 func (captcha *Captcha) genImage(text string) *CImage {
 
 	cimg := CreateCImage(captcha.imageConfig)
-	cimg.drawString(text, captcha.imageConfig.Offset)
+	cimg.drawString(text, captcha.imageConfig.Offset, captcha.imageConfig.ReOffset)
 
 	for _, filter := range captcha.filterManager.GetFilters() {
 		filter.Proc(cimg)

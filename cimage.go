@@ -60,7 +60,7 @@ func (m *CImage) drawCircle(x, y, radius int, colorIdx uint8) {
 	}
 }
 
-func (m *CImage) drawString(text string, offset int) *CImage {
+func (m *CImage) drawString(text string, offset, reOffset int) *CImage {
 
 	fg, bg := image.Black, &image.Uniform{color.RGBA{255, 255, 255, 255}}
 	draw.Draw(m, m.Bounds(), bg, image.ZP, draw.Src)
@@ -72,7 +72,7 @@ func (m *CImage) drawString(text string, offset int) *CImage {
 	i := 0
 	for _, s := range text {
 		c.SetFont(m.config.fontManager.GetRandomFont())
-		charX := (int(c.PointToFix32(m.config.FontSize)>>8))*i + offset
+		charX := (int(c.PointToFix32(m.config.FontSize)>>8))*i + offset - reOffset*i
 		charY := int(c.PointToFix32(m.config.FontSize) >> 8)
 		charPt := freetype.Pt(charX, charY)
 		c.DrawString(string(s), charPt)

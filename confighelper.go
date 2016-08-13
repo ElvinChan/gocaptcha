@@ -20,6 +20,7 @@ const (
 	DEFAULT_GC_PROBABILITY = 1
 	DEFAULT_GC_DIVISOR     = 100
 	DEFAULT_OFFSET         = 10
+	DEFAULT_REOFFSET       = 0
 )
 
 func loadConfigFromFile(configFile string) (error, string, *CaptchaConfig, *ImageConfig, *FilterConfig, *StoreConfig) {
@@ -104,6 +105,15 @@ func loadConfigFromFile(configFile string) (error, string, *CaptchaConfig, *Imag
 		offset = int(cfgOffset)
 	}
 	imageConfig.Offset = offset
+
+	var reOffset int
+	cfgReOffset, err := c.Int("image", "re_offset")
+	if nil != err {
+		reOffset = DEFAULT_REOFFSET
+	} else {
+		reOffset = int(cfgReOffset)
+	}
+	imageConfig.ReOffset = reOffset
 
 	//filterConfig
 	filterConfig := new(FilterConfig)
